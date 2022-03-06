@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "MYCARAPI", "MYCARAPI\MYCARAPI.pyproj", "{7662637A-E58C-4757-B6FF-87F57669A8F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7662637A-E58C-4757-B6FF-87F57669A8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7662637A-E58C-4757-B6FF-87F57669A8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83DC5EC4-2E1D-435C-BCF8-F8AB2BC536D9}
+	EndGlobalSection
+EndGlobal
