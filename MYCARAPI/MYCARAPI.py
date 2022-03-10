@@ -34,13 +34,13 @@ def chooseColor(colorName) :
 
         click_Button.click()
 
-        time.sleep(2)
+        time.sleep(3)
 
         click_Button = browser.find_element(By.XPATH, Colors[colorName])
 
         click_Button.click()
 
-        time.sleep(2)
+        time.sleep(3)
 
         click_Button = browser.find_element(By.ID, "trigger_exterior_colors")
 
@@ -67,13 +67,13 @@ def chooseTransmissions(transmissionsName) :
 
         click_Button.click()
 
-        time.sleep(2)
+        time.sleep(3)
 
         click_Button = browser.find_element(By.XPATH, Transmissions[transmissionsName])
 
         click_Button.click()
 
-        time.sleep(2)
+        time.sleep(3)
 
         click_Button = browser.find_element(By.ID, "trigger_transmissions")
 
@@ -86,6 +86,23 @@ def chooseTransmissions(transmissionsName) :
 def getCarFeatures() :
 
     carFeatures = {}
+
+    car_Photo = None
+
+    try:
+        imgDiv=browser.find_element(By.ID, "swipe-index-0")
+        car_Photo = imgDiv.get_attribute('src')
+        carFeatures["Photo"] = car_Photo;
+    except :
+        imgDiv=browser.find_element(By.CLASS_NAME, "row-pic")
+        car_Photo = imgDiv.get_attribute('src')
+        carFeatures["Photo"] = car_Photo;
+    
+    #car_Photo = browser.find_element(By.XPATH,"/html/body/section/div[5]/section/div/div/div/div[2]/div/div/img[1]").text
+
+    car_Title = browser.find_element(By.XPATH,"/html/body/section/div[5]/section/header/div[1]/h1").text
+
+    carFeatures["Title"] = car_Title;
     
     car_Price = browser.find_element(By.XPATH,"/html/body/section/div[5]/section/header/div[2]/span").text
 
@@ -97,11 +114,23 @@ def getCarFeatures() :
 
     carFeatures["Year"] = car_Year
 
+    car_Brand = browser.find_element(By.XPATH,"/html/body/section/div[5]/section/header/div[1]/h1").text
+
+    car_Brand = car_Brand.split(' ')[1]
+
+    carFeatures["Brand"] = car_Brand
+
+    car_Model = browser.find_element(By.XPATH,"/html/body/section/div[5]/section/header/div[1]/h1").text
+
+    car_Model = car_Model.split(' ')[2]
+
+    carFeatures["CarModel"] = car_Model
+
     headers = browser.find_elements(By.TAG_NAME,"dt")
     features = browser.find_elements(By.TAG_NAME,"dd")
 
     for x in range(0,11):
-        carFeatures[headers[x].text] = features[x].text
+        carFeatures[headers[x].text.replace(" ","_").replace("_#","")] = features[x].text
     
     return carFeatures
 
@@ -109,6 +138,7 @@ def chooseBrand(brandName) :
     
     try:
         Select(browser.find_element(By.ID,"make_select")).select_by_value(str(brandName).lower())
+        time.sleep(3)
     except :
         return
 
@@ -118,6 +148,7 @@ def chooseMinYear(year) :
     
     try:
         Select(browser.find_element(By.ID,"year_year_min_select")).select_by_value(str(year))
+        time.sleep(3)
     except :
         return
 
@@ -127,35 +158,28 @@ def chooseMaxYear(year) :
     
     try:
         Select(browser.find_element(By.ID,"year_year_max_select")).select_by_value(str(year))
+        time.sleep(3)
     except :
         return
 
     return
 
-def goInGatherInfoGetOut() :
-    cars = {}
-    for x in range(5):
-        listOfRefs = browser.find_elements(By.CLASS_NAME, "vehicle-card-link")
-        time.sleep(2)
-        listOfRefs[x].click()
-        time.sleep(2)
-        cars[x] = getCarFeatures()
-        time.sleep(2)
-        browser.find_element(By.XPATH, "/html/body/section/div[4]/section[1]/nav/ul/li[3]/span[2]/a").click()
-        time.sleep(2)
-
-    return cars
-
 def getCars() :
-    cars = {}
+    
+    #cars = {}
+    cars = []
 
     click_First_Car = browser.find_element(By.XPATH, "/html/body/section/div[2]/div[6]/div/div[1]/div[2]/div/div[2]/a")
 
     click_First_Car.click()
 
-    for x in range(5):
+    for x in range(6):
         
-        cars[x] = getCarFeatures()
+        #cars[x] = getCarFeatures()
+
+        cars.append(getCarFeatures());
+        
+        time.sleep(3)
        
         next_Button = browser.find_element(By.XPATH, "/html/body/section/div[4]/section[2]/div/div[2]/a")
         
@@ -166,6 +190,7 @@ def getCars() :
     return cars
 
 browser = webdriver.Chrome(ChromeDriverManager().install())
+browser.implicitly_wait(10)
 
 time.sleep(5)
 
@@ -196,7 +221,7 @@ def myServer():
                 chooseMaxYear(request.args.get('year'))
                 time.sleep(2)
 
-    return jsonify({'cars': getCars()})
+    return jsonify(getCars())
 
 @app.errorhandler(404)
 def not_found(error):

@@ -1,0 +1,203 @@
+﻿@model MyFilters
+
+@{ 
+    List<Car> cars = new List<Car>();
+
+    if (ViewBag.Cars != null)
+    {
+        cars = ViewBag.Cars;
+    }
+
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <style>
+
+
+    </style>
+
+</head>
+<body>
+
+    <form asp-action="Index" asp-controller="Car" method="post">
+        <div class="row">
+
+            <div class="col-md-3">
+                <select name="Color" asp-items="@(new SelectList(ViewBag.Colors))" class="form-control">
+                    <option value="">Renk Seçiniz</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select name="Transmission" asp-items="@(new SelectList(ViewBag.Transmissions))" class="form-control">
+                    <option value="">Vites Tipi Seçiniz</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select name="Brand" class="form-control">
+                    <option value="">Araba Markası Seçiniz</option>
+                    <option value="Acura">Acura</option>
+                    <option value="Alfa_romeo">Alfa Romeo</option>
+                    <option value="American_motors">American Motors</option>
+                    <option value="Am_general">Am General</option>
+                    <option value="Aston_martin">Aston Martin</option>
+                    <option value="Auburn">Auburn</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Austin">Austin</option>
+                    <option value="Austin_healey">Austin-Healey</option>
+                    <option value="Avanti_motors">Avanti Motors</option>
+                    <option value="Aentley">Bentley</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Bricklin">Bricklin</option>
+                    <option value="Bugatti">Bugatti</option>
+                    <option value="Buick">Buick</option>
+                    <option value="Cadillac">Cadillac</option>
+                    <option value="Checker">Checker</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="Chrysler">Chrysler</option>
+                    <option value="Citroen">Citroen</option>
+                    <option value="Daewoo">Daewoo</option>
+                    <option value="Daihatsu">Daihatsu</option>
+                    <option value="Datsun">Datsun</option>
+                    <option value="Delahaye">Delahaye</option>
+                    <option value="Delorean">Delorean</option>
+                    <option value="Desoto">Desoto</option>
+                    <option value="Detomaso">DeTomaso</option>
+                    <option value="Dodge">Dodge</option>
+                    <option value="Eagle">Eagle</option>
+                    <option value="Edsel">Edsel</option>
+                    <option value="Essex">Essex</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Fiat">FIAT</option>
+                    <option value="Fisker">Fisker</option>
+                    <option value="Ford">Ford</option>
+                    <option value="Franklin">Franklin</option>
+                    <option value="Genesis">Genesis</option>
+                    <option value="Geo">Geo</option>
+                    <option value="Gmc">GMC</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Hudson">Hudson</option>
+                    <option value="Hummer">Hummer</option>
+                    <option value="Hupmobile">Hupmobile</option>
+                    <option value="Hyundai">Hyundai</option>
+                    <option value="INFINITI">INFINITI</option>
+                    <option value="International">International</option>
+                    <option value="Isuzu">Isuzu</option>
+                    <option value="Jaguar">Jaguar</option>
+                    <option value="Jeep">Jeep</option>
+                    <option value="Jensen">Jensen</option>
+                    <option value="Kaiser">Kaiser</option>
+                    <option value="Karma">Karma</option>
+                    <option value="Kia">Kia</option>
+                    <option value="Koenigsegg">Koenigsegg</option>
+                    <option value="Lamborghini">Lamborghini</option>
+                    <option value="Lancia">Lancia</option>
+                    <option value="Land_rover">Land Rover</option>
+                    <option value="Lasalle">LaSalle</option>
+                    <option value="Lexus">Lexus</option>
+                    <option value="Lincoln">Lincoln</option>
+                    <option value="Lotus">Lotus</option>
+                    <option value="Lucid">Lucid</option>
+                    <option value="Maserati">Maserati</option>
+                    <option value="Maybach">Maybach</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Mclaren">McLaren</option>
+                    <option value="Mercedes_benz">Mercedes-Benz</option>
+                    <option value="Mercury">Mercury</option>
+                    <option value="Merkur">Merkur</option>
+                    <option value="MG">MG</option>
+                    <option value="Mini">MINI</option>
+                    <option value="Mitsubishi">Mitsubishi</option>
+                    <option value="Morgan">Morgan</option>
+                    <option value="Morris">Morris</option>
+                    <option value="Nash">Nash</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Oldsmobile">Oldsmobile</option>
+                    <option value="Opel">Opel</option>
+                    <option value="Packard">Packard</option>
+                    <option value="Pagani">Pagani</option>
+                    <option value="Panoz">Panoz</option>
+                    <option value="Peugeot">Peugeot</option>
+                    <option value="Plymouth">Plymouth</option>
+                    <option value="Polestar">Polestar</option>
+                    <option value="Pontiac">Pontiac</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Qvale">Qvale</option>
+                    <option value="RAM">RAM</option>
+                    <option value="Renault">Renault</option>
+                    <option value="Rivian">Rivian</option>
+                    <option value="Rolls_royce">Rolls-Royce</option>
+                    <option value="Rover">Rover</option>
+                    <option value="Saab">Saab</option>
+                    <option value="Saleen">Saleen</option>
+                    <option value="Saturn">Saturn</option>
+                    <option value="Scion">Scion</option>
+                    <option value="smart">smart</option>
+                    <option value="Spyker">Spyker</option>
+                    <option value="Sterling">Sterling</option>
+                    <option value="Studebaker">Studebaker</option>
+                    <option value="Subaru">Subaru</option>
+                    <option value="Sunbeam">Sunbeam</option>
+                    <option value="Suzuki">Suzuki</option>
+                    <option value="Tesla">Tesla</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Triumph">Triumph</option>
+                    <option value="TVR">TVR</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Volvo">Volvo</option>
+                    <option value="Willys">Willys</option>
+                    <option value="Yugo">Yugo</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <select name="Year" asp-items="@(new SelectList(ViewBag.Years))" class="form-control">
+                    <option value="">Yıl Seçiniz</option>
+                </select>
+            </div>
+
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-success" name="name" value="Getir" />
+            </div>
+            
+        </div>
+    </form>
+
+    <hr />
+
+    <div class="container">
+
+        <div class="row">
+
+            @foreach (var car in cars)
+            {
+                <div class="col-md-4" style="margin-bottom:2%">
+                    <div class="card" style="width: 18rem">
+                        <img src="@car.Photo" class="card-img-top" style="height:300px">
+                        <div class="card-body">
+                            <h5 class="card-title">@car.Title</h5>
+                            <p class="card-text">Fiyat       : @car.Price</p>
+                            <p class="card-text">Marka       : @car.Brand</p>
+                            <p class="card-text">Model       : @car.CarModel</p>
+                            <p class="card-text">Renk        : @car.Exterior_color</p>
+                            <p class="card-text">Yakıt Tipi  : @car.Fuel_type</p>
+                            <p class="card-text">Vites Tipi  : @car.Transmission</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>
